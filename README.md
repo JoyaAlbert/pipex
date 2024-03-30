@@ -1,8 +1,6 @@
-intento de explicar mi pipex
-
 vamos a recrear el uso de los pipes en unix usando c
 
-un pipe permite utilizar un comando como la entrada del siguiente , es decir
+un pipe permite utilizar un comando como la entrada del siguiente , ejemplo
 
 ·   < a cat | sort > outfile 
 
@@ -30,7 +28,7 @@ pipe(fd); // creamos la tuberia abre ambos fds y guarda sus valores en fd[0] lee
 ```
 #####################################################################
 
-para poder trabajar con los procesos tenemos q copiarlos para eso usamos la funcion fork q dara valor a nuestros pid y nos permitira trabajar con los procesos segun su jerarquia
+para poder trabajar con los procesos tenemos q copiarlos (coexisten a la vez) para eso usamos la funcion fork q dara valor a nuestros pid y nos permitira trabajar con los procesos segun su jerarquia
 > si el pid es 0 proceso padre
 
 > si el pid es mayor q 0 creara otro fork del proceso y hara el proceso hijo final
@@ -39,7 +37,7 @@ para poder trabajar con los procesos tenemos q copiarlos para eso usamos la func
     pid = fork(); //copiamos el proceso para hacer ambos comandos, dara otro valor ende tenemos dos pids
     if (pid != 0)
 	{
-		pid = fork(); //copiamos el proceso por ende realizamos el proceso hijo (segunddo comando) y cerramos los fds del pipe
+		pid = fork(); //copiamos el proceso por ende realizamos el proceso hijo (segunddo comando)  cuando este pid vale 0 y cerramos los fds del pipe
 		if (pid == -1)
 			errorpid();
 		if (pid == 0)
@@ -49,11 +47,14 @@ para poder trabajar con los procesos tenemos q copiarlos para eso usamos la func
 	}
     else //pid == 0 hacemos el primer proceso (padre) (primer comando)
 		  process_father(fd, argv, envp);
-	waitpid(pid, NULL, 0); //e esperamos a q el proceso acabe
+	waitpid(pid, NULL, 0); //esperamos a q el proceso acabe
 
 ```
+##################
+ahora vamos a ver los procesos 
+##################
 
-ahora vamos a ver los procesos primero el padre
+primero el padre
 
 cerramos el fichero de lectura (fd[0]) de nuestr pipe para trabajar
 
@@ -84,11 +85,11 @@ void process_father(int *fd, char *argv[], char **envp)
 	close (fd[1]); //CERRAMOS EL PIPE
 	args = ft_split(argv[2], ' '); //OBTENEMOS COAMNDO
 	path = getpath(args[0], envp); //OBTENEMOS EL PATH DE LOS COMANDOS
-    execution(path, args, envp);
+    execution(path, args, envp); //lee en nuestra entrada abierta stdin q es el input y escribe en nuesta salida abierta q es la salida del pipe en nuestr stdout
 }
 
 ```
-
+##################
 el proceso hijo sigue la siguiente estructura
 
 cerramos la salida de nuestro pipe y abrimos nustro fichero output
@@ -106,9 +107,10 @@ void process_son(int *fd, char *argv[], char **envp)
 
     close(fd[1]);
     fd_out = open(argv[4], O_WRONLY | O_CREAT |O_TRUNC, 0666); //dejame escribir si no existe crealo 0666 es el permiso deja escribir y leer pero no ejecutar
-    dup2(fd[0], STDIN_FILENO); //ENTRADA DEL PIPE EN ENTRADA ESTANDAR
+    dup2(fd[0], STDIN_FILENO); //ENTRADA DEL PIPE EN ENTRADA ESTANDAR es la salida de nuestro padre 
     close(fd[0]);
     dup2(fd_out, STDOUT_FILENO); //FICHERO DE SALIDA EN SALIDA ESTANDAR
+	close(fd_out);
     args = ft_split(argv[3], ' '); //COMANDO
     if (args[0][0] != '/')
     {
@@ -119,10 +121,9 @@ void process_son(int *fd, char *argv[], char **envp)
         execution(args[0], args, envp); //EJECUTA COMMANDO OBTENIDO
 }
 ```
-
+##################
 >veamos como hemos obtenido el path y como ejecutamos
-
-<primero ejecutamos>
+primero ejecutamos
 
 exceve ejecuta el comando que le demos con su path adecuado devuelve -1 si  enceuntra algun error 
 ```c
@@ -140,5 +141,60 @@ void execution(char *path, char **argv, char **envp)
 }
 ```
 
-<ahora encontrenmos el path>
+para el path utilizamos el envp que dice todos los datos del sistema incluyendo las rutas para los comandos del sistema se enceuntran en una linea de la forma 
+PATH=
+solo nos queda serparar cada directorioy juntarlo con el comando que necesitamos
+para obtener la ruta completa
+por ejemplo el comado ls se encuentra en la ruta "/usr/bin/ls" q es lo que le tenemos q pasar a execve
 
+########
+para eso la estrategia es recoger el path entero de todos los comandos en un array
+separar cada directorio y almacenarlos en una matriz
+juntar cada comando con nuestro directorio y abrir ese fichero si no existe probamos con el siguiente directorio, asi hasta q lo encontremos
+y devolvemos la ruta como en el ejemplo anterior del ls
+
+
+```c
+char	*getpatharray(char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i] != 0)
+	{
+		if (ft_strnstr(envp[i], "PATH=", 5) != NULL)
+			return (ft_strnstr(envp[i], "PATH=", 5));
+		i++;	
+	}
+	return (NULL);
+}
+
+char *getpath(char *args, char *envp[])
+{
+	char	**paths;
+	int i;
+	char	*aux;
+	char	*path;
+	int	fd;
+	i = 0;
+	paths = ft_split(ft_strchr(getpatharray(envp), '/'), ':');
+	while (paths[i] != NULL)
+	{
+		aux = ft_strjoin(paths[i], "/");
+		path = ft_strjoin(aux, args);
+		free(aux);
+		fd = open(path, O_RDONLY);
+		if (fd >= 0)
+		{
+			matrixfree(paths);
+			close(fd);
+			return (path);
+		}
+		free(path);
+		i++;
+	}
+	matrixfree(paths);
+	return (NULL);
+}
+
+```

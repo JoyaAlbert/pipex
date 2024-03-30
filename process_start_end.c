@@ -45,6 +45,7 @@ void process_son(int *fd, char *argv[], char **envp)
     dup2(fd[0], STDIN_FILENO);
     close(fd[0]);
     dup2(fd_out, STDOUT_FILENO);
+    close(fd_out);
     args = ft_split(argv[3], ' ');
     if (args[0][0] != '/')
     {
