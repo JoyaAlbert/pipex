@@ -23,12 +23,12 @@ int main(int argc, char *argv[], char **envp)
 		if (pid == -1)
 			errorpid();
 		if (pid == 0)
-			end_child(fd, argv, envp);
+			son(fd, argv, envp);
 		close(fd[0]);
 		close(fd[1]);
 	}
     else
-		start_child(fd, argv, envp);
+		father(fd, argv, envp);
 	waitpid(pid, NULL, 0);
 	return (0);
 }

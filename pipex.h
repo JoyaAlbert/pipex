@@ -22,8 +22,8 @@ void    checkargs(int argc);
 void    errorpid();
 
 //process
-void start_child(int *fd, char *argv[], char **envp);
-void end_child(int *fd, char *argv[], char **envp);
+void father(int *fd, char *argv[], char **envp);
+void son(int *fd, char *argv[], char **envp);
 //paths
 char *getpath(char *args, char *envp[]);
 void matrixfree(char	**matrix);

@@ -12,7 +12,7 @@ void execution(char *path, char **argv, char **envp)
         exit(EXIT_FAILURE);
     }
 }
-void start_child(int *fd, char *argv[], char **envp)
+void father(int *fd, char *argv[], char **envp)
 {
 	int	fd_input;
 	char	**args;
@@ -34,7 +34,7 @@ void start_child(int *fd, char *argv[], char **envp)
     execution(path, args, envp);
 }
 
-void end_child(int *fd, char *argv[], char **envp)
+void son(int *fd, char *argv[], char **envp)
 {
     int fd_out;
     char    **args;
