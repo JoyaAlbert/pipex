@@ -12,7 +12,7 @@ void execution(char *path, char **argv, char **envp)
         exit(EXIT_FAILURE);
     }
 }
-void father(int *fd, char *argv[], char **envp)
+void process_father(int *fd, char *argv[], char **envp)
 {
 	int	fd_input;
 	char	**args;
@@ -34,7 +34,7 @@ void father(int *fd, char *argv[], char **envp)
     execution(path, args, envp);
 }
 
-void son(int *fd, char *argv[], char **envp)
+void process_son(int *fd, char *argv[], char **envp)
 {
     int fd_out;
     char    **args;
@@ -50,7 +50,6 @@ void son(int *fd, char *argv[], char **envp)
     {
         path = getpath(args[0], envp);
         execution(path, args, envp);
-        free(path);
     }
     else
         execution(args[0], args, envp);
