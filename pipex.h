@@ -8,7 +8,7 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-
+# include <error.h>
 
 
 //utils
@@ -18,6 +18,8 @@ unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size);
 char	*ft_strnstr(char *hay, char *needle, size_t len);
 char	*ft_strchr(char *s, int c);
 char	*ft_strjoin(char *s1, char *s2);
+void    checkargs(int argc);
+void    errorpid();
 
 //process
 void start_child(int *fd, char *argv[], char **envp);
@@ -25,5 +27,6 @@ void end_child(int *fd, char *argv[], char **envp);
 //paths
 char *getpath(char *args, char *envp[]);
 void matrixfree(char	**matrix);
+ //ERRORS MESSAGES
 
 #endif

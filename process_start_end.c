@@ -8,6 +8,8 @@ void execution(char *path, char **argv, char **envp)
     {
         matrixfree(argv);
         free(path);
+        perror("ERROR while executing");
+        exit(EXIT_FAILURE);
     }
 }
 void start_child(int *fd, char *argv[], char **envp)
@@ -19,7 +21,10 @@ void start_child(int *fd, char *argv[], char **envp)
 	close(fd[0]);
 	fd_input = open(argv[1], O_RDONLY);
 	if (fd_input == -1)
-		exit;
+    {
+        perror("inputfile does not exits");
+		exit(EXIT_FAILURE);
+    }
 	dup2(fd_input, STDIN_FILENO); //copia del fd de entrada en el stdin
 	close(fd_input);
 	dup2(fd[1], STDOUT_FILENO); //copia del fd de salida en la salida estandar
@@ -36,7 +41,7 @@ void end_child(int *fd, char *argv[], char **envp)
     char    *path;
 
     close(fd[1]);
-    fd_out = open(argv[4], O_WRONLY | O_CREAT , 0666); //dejame escribir si no existe crealo 0666 es el permiso deja escribir y leer pero no ejecutar
+    fd_out = open(argv[4], O_WRONLY | O_CREAT |O_TRUNC, 0666); //dejame escribir si no existe crealo 0666 es el permiso deja escribir y leer pero no ejecutar
     dup2(fd[0], STDIN_FILENO);
     close(fd[0]);
     dup2(fd_out, STDOUT_FILENO);
