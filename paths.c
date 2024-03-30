@@ -52,4 +52,5 @@ char *getpath(char *args, char *envp[])
 		i++;
 	}
 	matrixfree(paths);
+	return (NULL);
 }

@@ -1,7 +1,9 @@
-SRC				=	pipex.c utils/ft_split.c utils/ft_strlcpy.c utils/ft_strlen.c
+SRC				=	pipex.c paths.c process_start_end.c errors.c utils/ft_split.c utils/ft_strchr.c  \
+					utils/ft_strjoin.c utils/ft_strlcpy.c  utils/ft_strlen.c utils/ft_strnstr.c \
+
+GCC 			=	gcc
+CFLAGS			=	-Wall -Wextra -Werror
 OBJ				=	$(SRC:.c=.o)
-LIB				=	ar rcs
-CFLAGS			=	-Wall -Wextra #-Werror
 NAME			=	pipex
 
 CLR_RMV		:= \033[0m
@@ -13,7 +15,7 @@ CYAN 		:= \033[1;36m
 
 $(NAME):		$(OBJ)
 				@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CYAN}"
-				$(LIB) $(FLAGS) $(NAME) $(OBJ)
+				$(GCC) $(FLAGS) -o $(NAME) $(OBJ)
 
 
 all:			$(NAME)
@@ -28,7 +30,7 @@ pato:
 
 clean:
 				@echo "$(RED)Deleting ${YELLOW}.o ${CLR_RMV}"
-				$(RM) $(OBJ) $(OBJ_BONUS)
+				$(RM) $(OBJ)
 fclean:			pato clean
 				@echo "$(RED)Deleting ${YELLOW}.a ${CLR_RMV}"
 				$(RM) $(NAME)
