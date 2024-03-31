@@ -8,7 +8,7 @@ void execution(char *path, char **argv, char **envp)
     {
         matrixfree(argv);
         free(path);
-        perror("ERROR while executing");
+        ft_printf("ERROR while executing\n");
         exit(EXIT_FAILURE);
     }
 }

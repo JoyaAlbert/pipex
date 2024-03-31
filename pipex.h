@@ -1,6 +1,7 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
+# include "printf/ft_printf.h"
 # include <sys/types.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -9,7 +10,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <error.h>
-
+#include <string.h>
 
 //utils
 char	**ft_split(char *s, char c);
