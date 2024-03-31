@@ -1,6 +1,5 @@
 SRC				=	pipex.c paths.c process_start_end.c errors.c utils/ft_split.c utils/ft_strchr.c  \
-					utils/ft_strjoin.c utils/ft_strlcpy.c  utils/ft_strlen.c utils/ft_strnstr.c \
-
+					utils/ft_strjoin.c utils/ft_strlcpy.c  utils/ft_strlen.c utils/ft_strnstr.c 
 GCC 			=	gcc
 CFLAGS			=	-Wall -Wextra -Werror
 OBJ				=	$(SRC:.c=.o)
@@ -14,6 +13,7 @@ BLUE		:= \033[1;34m
 CYAN 		:= \033[1;36m
 
 $(NAME):		$(OBJ)
+				@clear
 				@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CYAN}"
 				$(GCC) $(FLAGS) -o $(NAME) $(OBJ)
 
@@ -23,17 +23,20 @@ all:			$(NAME)
 RM				=	rm -f
 
 pato:			
+				@clear 
 				@echo "${YELLOW}'⣿⣿⣿⣿⣿⣿⣿⣿⡿⢋⣩⣭⣶⣶⣮⣭⡙⠿⣿⣿⣿⣿⣿⣿'\n'⣿⣿⣿⣿⣿⣿⠿⣋⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡙⢿⣿⣿⣿'\n'⣿⣿⣿⣿⣿⡃⠄⠹⡿⣿⣿⣿⣿⠟⠛⣿⣿⣿⣿⣷⡌⢿⣿⣿'\n'⣿⣿⣿⣿⣿⠐⣠⡶⣶⣲⡎⢻⣿⣤⣴⣾⣿⣿⣿⣿⣿⠸⣿⣿'\n'⣿⠟⣋⡥⡶⣞⡯⣟⣾⣺⢽⡧⣥⣭⣉⢻⣿⣿⣿⣿⣿⣆⢻⣿"
 				@echo "${YELLOW}'⡃⣾⢯⢿⢽⣫⡯⣷⣳⢯⡯⠯⠷⠻⠞⣼⣿⣿⣿⣿⣿⣿⡌⣿'\n'⣦⣍⡙⠫⠛⠕⣋⡓⠭⣡⢶⠗⣡⣶⡝⣿⣿⣿⣿⣿⣿⣿⣧⢹'\n'⣿⣿⣿⣿⣿⣿⣘⣛⣋⣡⣵⣾⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⢸'\n'⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⢸'\n'⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⢸'\n'⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⢸'\n'"
 
 
 
-clean:
+clean:			
 				@echo "$(RED)Deleting ${YELLOW}.o ${CLR_RMV}"
 				$(RM) $(OBJ)
-fclean:			pato clean
+
+fclean:			pato clean 
 				@echo "$(RED)Deleting ${YELLOW}.a ${CLR_RMV}"
-				$(RM) $(NAME)
+				$(RM) $(NAME) 
+				
 
 
 re:				fclean all
