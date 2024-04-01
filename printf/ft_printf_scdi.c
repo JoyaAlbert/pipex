@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_scdi.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ajoya-pi <ajoya-pi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:28:26 by ajoya-pi          #+#    #+#             */
-/*   Updated: 2023/12/22 10:00:18 by joya             ###   ########.fr       */
+/*   Updated: 2024/04/01 13:15:53 by ajoya-pi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_putchar(char c)
 {
-	return (write(1, &c, 1));
+	return (write(2, &c, 1));
 }
 
 int	ft_putstr(char *str)
@@ -29,7 +29,7 @@ int	ft_putstr(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		write(1, &str[i], 1);
+		write(2, &str[i], 1);
 		i++;
 	}
 	return (i);

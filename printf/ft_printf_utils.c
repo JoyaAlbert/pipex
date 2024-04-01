@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ajoya-pi <ajoya-pi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:23:03 by ajoya-pi          #+#    #+#             */
-/*   Updated: 2023/12/22 10:04:06 by joya             ###   ########.fr       */
+/*   Updated: 2024/04/01 13:15:03 by ajoya-pi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	putstrn(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		write(1, &str[i], 1);
+		write(2, &str[i], 1);
 		i++;
 	}
 	free(str);
