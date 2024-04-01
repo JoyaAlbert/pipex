@@ -9,7 +9,7 @@ int main(int argc, char **argv, char **envp)
     printf("Hola mundo, mi identificador de proceso es: %d\n", getpid());
     while (envp[i] != NULL)
     {
-        printf("%s\n", envp[i]);
+        //printf("%s\n", envp[i]);
         i++;
     }
     
