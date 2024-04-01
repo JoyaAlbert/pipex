@@ -8,12 +8,12 @@ void leaks()
 }
 int main(int argc, char *argv[], char **envp)
 {
-    pid_t   pid; //process id
-    int     fd[2]; //uno para entrada y otro para salida
+    pid_t   pid;
+    int     fd[2];
 
 	checkargs(argc);
-    pipe(fd); // creamos la tuberia abre ambos fds y guarda sus valores en fd[0] leer y fd[1] escribir
-	pid = fork(); //copia del proceso (el progranma) cuadno vale 0 abrikmos proceso hijo todo llo demas es volver a copiay y cerrar
+    pipe(fd);
+	pid = fork();
     if (pid == -1)
 		errorpid();
     if (pid != 0)

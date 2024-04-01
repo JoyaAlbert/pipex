@@ -36,9 +36,9 @@ void process_father(int *fd, char *argv[], char **envp)
         perror("inputfile does not exits");
 		exit(EXIT_FAILURE);
     }
-	dup2(fd_input, STDIN_FILENO); //copia del fd de entrada en el stdin
+	dup2(fd_input, STDIN_FILENO); 
 	close(fd_input);
-	dup2(fd[1], STDOUT_FILENO); //copia del fd de salida en la salida estandar
+	dup2(fd[1], STDOUT_FILENO); 
 	close (fd[1]);
 	args = ft_split(argv[2], ' ');
     if (args[0][0] != '/' && args[0][0] != '.')
@@ -57,7 +57,7 @@ void process_son(int *fd, char *argv[], char **envp)
     char    *path;
 
     close(fd[1]);
-    fd_out = open(argv[4], O_WRONLY | O_CREAT |O_TRUNC, 0666); //dejame escribir si no existe crealo 0666 es el permiso deja escribir y leer pero no ejecutar
+    fd_out = open(argv[4], O_WRONLY | O_CREAT |O_TRUNC, 0666); 
     dup2(fd[0], STDIN_FILENO);
     close(fd[0]);
     dup2(fd_out, STDOUT_FILENO);

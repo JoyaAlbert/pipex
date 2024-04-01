@@ -9,8 +9,7 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-//# include <error.h>
-#include <string.h>
+# include <string.h>
 
 //utils
 char	**ft_split(char *s, char c);
