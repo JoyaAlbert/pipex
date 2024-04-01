@@ -24,6 +24,7 @@ char	*getpatharray(char **envp)
 			return (ft_strnstr(envp[i], "PATH=", 5));
 		i++;	
 	}
+	ft_printf("Not path found\n");
 	return (NULL);
 }
 
