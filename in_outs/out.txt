@@ -1,0 +1,13 @@
+errors.c
+errors.o
+Makefile
+paths.c
+paths.o
+pipex
+pipex.c
+pipex.h
+pipex.o
+printf
+process_start_end.c
+process_start_end.o
+utils
