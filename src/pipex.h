@@ -1,7 +1,7 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "../printf/ft_printf.h"
+# include "printf/ft_printf.h"
 # include <sys/types.h>
 # include <unistd.h>
 # include <fcntl.h>
