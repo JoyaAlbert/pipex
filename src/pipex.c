@@ -12,11 +12,11 @@ int	main(int argc, char *argv[], char **envp)
 		errorpid();
 	if (pid != 0)
 	{
-		pid = fork();
-		if (pid == -1)
-			errorpid();
-		if (pid == 0)
-			process_son(fd, argv, envp);
+		//pid = fork();
+		//if (pid == -1)
+		//	errorpid();
+		//if (pid == 0)
+		process_son(fd, argv, envp);
 		close(fd[0]);
 		close(fd[1]);
 	}
