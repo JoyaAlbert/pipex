@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_start_end.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ajoya-pi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/09 12:35:59 by ajoya-pi          #+#    #+#             */
+/*   Updated: 2024/07/09 12:36:01 by ajoya-pi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 void	execution(char *path, char **argv, char **envp)
@@ -17,6 +29,7 @@ void	execution(char *path, char **argv, char **envp)
 void	executionpathgiven(char *path, char **argv, char **envp)
 {
 	int	check;
+
 	check = execve(path, argv, envp);
 	if (check == -1)
 	{

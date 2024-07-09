@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   paths.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ajoya-pi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/09 12:35:18 by ajoya-pi          #+#    #+#             */
+/*   Updated: 2024/07/09 12:35:20 by ajoya-pi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 void	matrixfree(char	**matrix)
@@ -35,7 +47,7 @@ char	*getpath(char *args, char *envp[])
 	char	*aux;
 	char	*path;
 	int		fd;
-	
+
 	i = 0;
 	paths = ft_split(ft_strchr(getpatharray(envp), '/'), ':');
 	while (paths[i] != NULL)

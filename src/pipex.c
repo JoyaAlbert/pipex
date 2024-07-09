@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ajoya-pi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/09 12:35:30 by ajoya-pi          #+#    #+#             */
+/*   Updated: 2024/07/09 12:35:36 by ajoya-pi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 int	main(int argc, char *argv[], char **envp)
@@ -11,15 +23,7 @@ int	main(int argc, char *argv[], char **envp)
 	if (pid == -1)
 		errorpid();
 	if (pid != 0)
-	{
-		//pid = fork();
-		//if (pid == -1)
-		//	errorpid();
-		//if (pid == 0)
 		process_son(fd, argv, envp);
-		close(fd[0]);
-		close(fd[1]);
-	}
 	else
 		process_father(fd, argv, envp);
 	waitpid(pid, NULL, 0);
