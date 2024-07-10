@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajoya-pi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:18 by ajoya-pi          #+#    #+#             */
-/*   Updated: 2024/07/09 12:35:20 by ajoya-pi         ###   ########.fr       */
+/*   Updated: 2024/07/10 23:35:57 by joya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*getpatharray(char **envp)
 		i++;
 	}
 	ft_printf("Not path found\n");
+	exit(EXIT_FAILURE);
 	return (NULL);
 }
 
@@ -65,6 +66,6 @@ char	*getpath(char *args, char *envp[])
 		free(path);
 		i++;
 	}
-	matrixfree(paths);
+	//matrixfree(paths);
 	return (NULL);
 }
