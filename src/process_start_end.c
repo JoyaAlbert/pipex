@@ -16,10 +16,15 @@ void	execution(char *path, char **argv, char **envp)
 {
 	int	check;
 
+	if (path == NULL)
+	{
+		free(path);
+		ft_printf("ERROR no path found\n");
+		exit(EXIT_FAILURE);
+	}
 	check = execve(path, argv, envp);
 	if (check == -1)
 	{
-		matrixfree(argv);
 		free(path);
 		ft_printf("ERROR while executing\n");
 		exit(EXIT_FAILURE);
@@ -33,7 +38,6 @@ void	executionpathgiven(char *path, char **argv, char **envp)
 	check = execve(path, argv, envp);
 	if (check == -1)
 	{
-		matrixfree(argv);
 		ft_printf("ERROR while executing\n");
 		exit(EXIT_FAILURE);
 	}
@@ -49,7 +53,7 @@ void	process_father(int *fd, char *argv[], char **envp)
 	fd_input = open(argv[1], O_RDONLY);
 	if (fd_input == -1)
 	{
-		ft_printf("inputfile does not exits\n");
+		ft_printf("INPUT FILE DOES NOT EXIST\n");
 		exit(EXIT_FAILURE);
 	}
 	dup2(fd_input, STDIN_FILENO);

@@ -66,6 +66,6 @@ char	*getpath(char *args, char *envp[])
 		free(path);
 		i++;
 	}
-	//matrixfree(paths);
+	matrixfree(paths);
 	return (NULL);
 }
