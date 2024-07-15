@@ -6,7 +6,7 @@
 /*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:18 by ajoya-pi          #+#    #+#             */
-/*   Updated: 2024/07/10 23:35:57 by joya             ###   ########.fr       */
+/*   Updated: 2024/07/15 20:52:28 by joya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*getpatharray(char **envp)
 	i = 0;
 	while (envp[i] != 0)
 	{
-		if (ft_strnstr(envp[i], "PATH=", 5) != NULL)
+		if (ft_strnstr(envp[i], "PATH=/", 6) != NULL)
 			return (ft_strnstr(envp[i], "PATH=", 5));
 		i++;
 	}
